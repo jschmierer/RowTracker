@@ -26,13 +26,13 @@ class DistancedWorkout(Workout):
             if v == "y":
                 flag = False
                 for i in range(n):
-                    temp = input("Distance for interval " + str(i+1) + "? ")
+                    temp = int(input("Distance for interval " + str(i+1) + "? "))
                     tlist.append(temp)
         if flag:
             if n > 1:
-                temp = input("Distance per interval? ")
+                temp = int(input("Distance per interval? "))
             else:
-                temp = input("Distance? ")
+                temp = int(input("Distance? "))
             for i in range(n):
                 tlist.append(temp)
 

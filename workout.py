@@ -16,7 +16,6 @@ class Workout(ABC):
         for i in ints:
             timeSum += self.timeFormat(i[0], True)
             distSum += i[1]
-            #print(timeSum)
         avgSplit = round(timeSum / distSum * 500, 1)
         return (self.timeFormat(timeSum, False), distSum, self.timeFormat(avgSplit, False))
 
@@ -28,18 +27,18 @@ class Workout(ABC):
             if time.count(':') == 2:
                 colpos1 = time.index(':')
                 colpos2 = time.index(':', colpos1+1)
-                total = int(time[colpos2+1:])
+                total = float(time[colpos2+1:])
                 total += int(time[colpos1+1:colpos2]) * 60
                 total += int(time[:colpos1]) * 3600
             else:
                 colpos = time.index(':')
-                total = int(time[colpos+1:])
+                total = float(time[colpos+1:])
                 total += int(time[:colpos]) * 60
             return total
         hours = time // 3600
         time -= hours * 3600
         minutes = int(time / 60)
-        seconds = time % 60
+        seconds = round(time % 60, 1)
         if minutes < 10:
             minutes = "0" + str(minutes)
         if seconds < 10:
