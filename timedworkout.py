@@ -7,10 +7,9 @@ class TimedWorkout(Workout):
         super().__init__()
         self.ints = i
         self.isVariable = v
-        if len(i) > 1:
-            self.avgInt = self.calcAverage(self.ints)
-        else:
-            self.avgInt = None
+        self.avgHr = 0
+        self.maxHr = 0
+        self.avgInt = self.calcAverage(self.ints)
 
     # workout structure will be ("time", distance, "split")   
     def recordWorkout(self):
@@ -45,6 +44,9 @@ class TimedWorkout(Workout):
                 split = input("Enter split (per 500m) for interval " + str(i + 1) + ": ")
             dist = self.findDist(tlist[i], split)
             self.ints.append((tlist[i], dist, split))
+        print()
+        self.avgHr = int(input("Enter average heart rate: "))
+        self.maxHr = int(input("Enter max heart rate: "))
 
         self.avgInt = self.calcAverage(self.ints)
         #print(self.avgInt)

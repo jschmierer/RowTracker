@@ -4,13 +4,15 @@ class DistancedWorkout(Workout):
 
     # intervals should be in a list, with elements tuples as ("distance", "split")
     def __init__(self, i=[], v=False):
-            super().__init__()
-            self.ints = i
-            self.isVariable = v
-            if len(i) > 1:
-                self.avgInt = self.calcAverage(self.ints)
-            else:
-                self.avgInt = None
+        super().__init__()
+        self.ints = i
+        self.isVariable = v
+        self.avgHr = 0
+        self.maxHr = 0
+        if len(i) > 1:
+            self.avgInt = self.calcAverage(self.ints)
+        else:
+            self.avgInt = None
 
     # workout structure will be ("time", distance, "split")   
     def recordWorkout(self):
@@ -45,6 +47,9 @@ class DistancedWorkout(Workout):
                 split = input("Enter split (per 500m) for interval " + str(i + 1) + ": ")
             time = self.findTime(tlist[i], split)
             self.ints.append((time, tlist[i], split))
+        print()
+        self.avgHr = int(input("Enter average heart rate: "))
+        self.maxHr = int(input("Enter max heart rate: "))
 
         self.avgInt = self.calcAverage(self.ints)
 

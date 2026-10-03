@@ -21,7 +21,8 @@ class Workout(ABC):
 
 
     # true: 15:00 to 900, false: 900 to 15:00
-    def timeFormat(self, time, direction):
+    @staticmethod
+    def timeFormat(time, direction):
         """True: 15:00 to 900, False: 900 to 15:00"""
         if direction:
             if time.count(':') == 2:
@@ -35,7 +36,7 @@ class Workout(ABC):
                 total = float(time[colpos+1:])
                 total += int(time[:colpos]) * 60
             return total
-        hours = time // 3600
+        hours = int(time / 3600)
         time -= hours * 3600
         minutes = int(time / 60)
         seconds = round(time % 60, 1)
@@ -50,9 +51,11 @@ class Workout(ABC):
 
     def printWorkout(self):
         print("Date: " + self.date)
+        print("Average heart rate: " + str(self.avgHr) + "\tMax heart rate: " + str(self.maxHr))
         if len(self.ints) > 1:
             print("Overall \t" + self.intervalToString(self.avgInt))
         for k in range(len(self.ints)):
             if len(self.ints) > 1:
                 print("Interval " + str(k + 1), end="\t")
             print(self.intervalToString(self.ints[k]))
+        
