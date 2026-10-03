@@ -12,7 +12,6 @@ class TimedWorkout(Workout):
         else:
             self.avgInt = None
 
-
     # workout structure will be ("time", distance, "split")   
     def recordWorkout(self):
         print("** STEP 1: Create the workout **")

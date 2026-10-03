@@ -2,7 +2,7 @@ from workout import Workout
 
 class DistancedWorkout(Workout):
 
-#    intervals should be in a list, with elements tuples as ("distance", "split")
+    # intervals should be in a list, with elements tuples as ("distance", "split")
     def __init__(self, i=[], v=False):
             super().__init__()
             self.ints = i
@@ -24,6 +24,7 @@ class DistancedWorkout(Workout):
             n = int(n)
             v = input("Variable intervals? [y/n] ").strip()
             if v == "y":
+                self.isVariable = True
                 flag = False
                 for i in range(n):
                     temp = int(input("Distance for interval " + str(i+1) + "? "))
