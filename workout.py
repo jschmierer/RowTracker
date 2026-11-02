@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import time
+import math
 
 class Workout(ABC):
 
@@ -48,6 +49,14 @@ class Workout(ABC):
             return str(minutes) + ":" + str(seconds)
         return str(hours) + ":" + str(minutes) + ":" + str(seconds)
 
+    @staticmethod
+    def splitWattsConvert(data, direction):
+        """True: 2:00 to 202.5, False: 202.5 to 2:00"""
+        if direction:
+            seconds = Workout.timeFormat(data, True)
+            return round(2.8 / ((seconds / 500) ** 3), 1)
+        seconds = round(math.cbrt(2.8 / data) * 500)
+        return Workout.timeFormat(seconds, False)
 
     def printWorkout(self):
         print("Date: " + self.date)
