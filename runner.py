@@ -1,9 +1,14 @@
 from timedworkout import TimedWorkout
 from distancedworkout import DistancedWorkout
+from customworkout import CustomWorkout
 from statsdash import StatsDash
 from user import User
 
 user = User("jschmierer", "password10", 17, "Jakob Schmierer")
+
+c = CustomWorkout()
+c.recordWorkout()
+c.printWorkout()
 
 #user.sd.addWorkout()
 #user.sd.printAllWorkouts()
