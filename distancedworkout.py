@@ -2,7 +2,7 @@ from workout import Workout
 
 class DistancedWorkout(Workout):
 
-    # intervals should be in a list, with elements tuples as ("distance", "split")
+    # intervals should be in a list, with elements tuples as ("time", distance, "split", "rest")
     def __init__(self, i=[], v=False):
         super().__init__()
         self.ints = i
@@ -14,7 +14,7 @@ class DistancedWorkout(Workout):
         else:
             self.avgInt = None
 
-    # workout structure will be ("time", distance, "split")   
+    # workout structure will be ("time", distance, "split", "rest")   
     def recordWorkout(self):
         print("** STEP 1: Create the workout **")
         tlist = []
@@ -30,10 +30,16 @@ class DistancedWorkout(Workout):
                 flag = False
                 for i in range(n):
                     temp = int(input("Distance for interval " + str(i+1) + "? "))
-                    tlist.append(temp)
+                    if i < n - 1:
+                        temp2 = input("Rest for interval " + str(i+1) + "? ")
+                    else:
+                        temp2 = 0
+                    tlist.append((temp, temp2))
         if flag:
             if n > 1:
                 temp = int(input("Distance per interval? "))
+                temp2 = input("Rest per interval? ")
+                temp = (temp, temp2)
             else:
                 temp = int(input("Distance? "))
             for i in range(n):
@@ -46,7 +52,10 @@ class DistancedWorkout(Workout):
             else:
                 split = input("Enter split (per 500m) for interval " + str(i + 1) + ": ")
             time = self.findTime(tlist[i], split)
-            self.ints.append((time, tlist[i], split))
+            interval = (time, tlist[i][0], split)
+            if len(tlist[i]) > 1:
+                interval = (time, tlist[i][0], split, tlist[i][1])
+            self.ints.append(interval)
         print()
         self.avgHr = int(input("Enter average heart rate: "))
         self.maxHr = int(input("Enter max heart rate: "))
